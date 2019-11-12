@@ -1,0 +1,23 @@
+{
+  "name": "smart-fan",
+  "homepage": "https://github.com/agurimon/smart-fan",
+  "authors": [
+    "agurimon <agurimon18@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./app/static/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "semantic": "^2.4.1",
+    "requirejs": "^2.3.6"
+  }
+}

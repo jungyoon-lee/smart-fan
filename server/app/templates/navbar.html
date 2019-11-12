@@ -1,0 +1,31 @@
+<div class="ui secondary menu">
+  <a class="item" href="{{ url_for('index') }}">
+    Home
+  </a>
+  <div class="right menu">
+    <a class="item" href="{{ url_for('master_enroll_check') }}">
+
+    </a>
+    <a class="item" href="{{ url_for('socket_start') }}">
+      <i class="cog icon"></i>
+    </a>
+  </div>
+</div>
+
+<div class="ui visible sidebar inverted vertical menu">
+  <a class="item header">
+      스마트팬
+  </a>
+  <a class="item menu">
+
+      <i class="angle left icon"></i>
+  </a>
+  <a class="item menu" href="{{ url_for('login') }}">
+
+      <i class="angle left icon"></i>
+  </a>
+  <a class="item menu" href="{{ url_for('register') }}">
+
+      <i class="angle left icon"></i>
+  </a>
+</div>
