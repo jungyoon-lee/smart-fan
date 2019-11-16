@@ -1,1 +1,1 @@
-from app.routes import *
+from app.routes import fan

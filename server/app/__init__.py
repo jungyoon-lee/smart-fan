@@ -16,6 +16,8 @@ db.create_all()
 
 from app import routes
 
+# from app.models.device import fan
+
 @app.route('/')
 def index():
     return render_template('index.html')
