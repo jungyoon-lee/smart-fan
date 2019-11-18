@@ -1,0 +1,36 @@
+import RPi.GPIO as gpio
+import time
+
+gpio.setmode(gpio.BCM)
+gpio.setwarnings(False)
+trig=13
+echo=19
+
+trig2=16
+echo2=20
+
+#센서를 추가할 것이면 trig2=16 echo2=20 처럼 선 꼽는 위치 쓰고 33 while문에 함수 호출 추가하면 끝!
+gpio.setup(trig,gpio.OUT)
+gpio.setup(trig2,gpio.OUT)
+gpio.setup(echo, gpio.IN)
+gpio.setup(echo2, gpio.IN)
+
+def dist(trig,echo):
+    gpio.output(trig,False)
+    time.sleep(0.5)
+    gpio.output(trig,True)
+    time.sleep(0.00001)
+    gpio.output(trig,False)
+    while gpio.input(echo)==0:
+        pulse_start=time.time()
+    while gpio.input(echo)==1:
+        pulse_end=time.time()
+    pulse_duration=pulse_end - pulse_start
+    distance=pulse_duration*17000
+    distance=round(distance,2)
+    return distance
+
+while True:
+    f=dist(trig,echo)
+    s=dist(trig2,echo2)
+    print("distance:",f,"cm\n","distance2:",s,"cm")
