@@ -22,7 +22,7 @@ def init_create_db():
     fan = Fan.query.filter_by(id=1).first()
 
     if fan is None:
-        fan = Fan(mode=1, state=False, newdata=False)
+        fan = Fan(mode=1, state=0, spin_speed=0)
         print(fan)
         db.session.add(fan)
         db.session.commit()
