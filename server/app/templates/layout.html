@@ -13,6 +13,13 @@
 <body>
   {% include 'navbar.html' %}
     <div id="content">
+        <div id="m-head" class="ui top fixed menu">
+          <div class="item">
+            <i class="sidebar large icon" id="m-icon"></i>
+            MENU
+          </div>
+        </div>
+
         <div id="body">
         {% block body %}
         {% endblock %}

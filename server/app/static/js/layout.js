@@ -1,7 +1,7 @@
 require(['/static/config.js'], function () {
   require(['jquery', 'semantic'], function ($, Semantic) {
+    $('#m-icon').click(function () { $('#m-menu').sidebar('toggle') });
     $('.ui.dropdown').dropdown();
-
     $('.ui.modal').modal({
         blurring: true
     }).modal('show');

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="pusher">
+  <h1>normal mode</h1>
+
+  <div class="ui buttons">
+    <button class="massive ui yellow button">
+      <i class="angle right icon"></i>
+      약풍
+    </button>
+    <button class="massive ui olive button">
+      <i class="angle double right icon"></i>
+      중풍
+    </button>
+    <button class="massive ui green button">
+      <i class="arrow circle right icon"></i>
+      강풍
+    </button>
+  </div>
+
+  <button class="massive ui grey button">
+    <i class="sync icon"></i>
+    회전
+  </button>
+  <button class="massive ui red button">
+    <i class="pause icon"></i>
+    정지
+  </button>
+
+</div>
+{% endblock %}
