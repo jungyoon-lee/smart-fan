@@ -1,0 +1,68 @@
+import RPi.GPIO as gpio
+import time
+
+gpio.setmode(gpio.BCM)
+gpio.setwarnings(False)
+trig=13
+echo=19
+
+trig2=16
+echo2=20
+
+#센서를 추가할 것이면 trig2=16 echo2=20 처럼 선 꼽는 위치 쓰고 33 while문에 함수 호출 추가하면 끝!
+gpio.setup(trig,gpio.OUT)
+gpio.setup(trig2,gpio.OUT)
+gpio.setup(echo, gpio.IN)
+gpio.setup(echo2, gpio.IN)
+
+def observation(trig,echo):
+    gpio.output(trig,False)
+    time.sleep(0.5)
+    gpio.output(trig,True)
+    time.sleep(0.00001)
+    gpio.output(trig,False)
+    while gpio.input(echo)==0:
+        pulse_start=time.time()
+    while gpio.input(echo)==1:
+        pulse_end=time.time()
+    pulse_duration=pulse_end - pulse_start
+    distance=pulse_duration*17000
+    distance=round(distance,2)
+    return distance
+
+def range_check(sensors,human_location):
+    i=0
+    while i<3: #센서 수에 따라 변경
+        if i==2: #센서 수에 따라 변경
+            return sensors,human_location
+        elif sensors[i]!=0:
+            human_location[i]=1
+            i+=1
+        else:
+            i+=1
+
+    
+human_location=[0,0]
+while True:
+    danger=0
+    sensors=[0,0]
+    
+    fir=observation(trig,echo)
+    sec=observation(trig2,echo2)
+    #sensors라는 빈 리스트에 각각 센서들의 거리값을 저장
+    if fir<=50 or sec<=50: #센싱한 거리에 따른 실행 조건문
+        sensors[0]=fir
+        sensors[1]=sec #센서 수에 따라 변경
+        
+        sensors,human_location=range_check(sensors,human_location)
+        #여기까지 left, right 범위 구하는 함수임
+        #모터 제어 함수 추가
+        
+    elif fir>=3 or sec<=3:
+        danger=1
+        #선풍기와 너무 가까운 상황일때 선풍기 멈추는 함수 추가 바람
+    else:
+        danger=0
+        
+    
+    print("distance:",fir,"cm\n","distance2:",sec,"cm")
