@@ -1,11 +1,12 @@
 from flask import render_template, request, url_for, flash, jsonify, redirect, abort
 import time
+import threading
 
 # from app.models.fan import Fan
 from app import app, db
 from app.models.fan import Fan
 #from motor import fan_speed, head_spin
-#from sensor import measure
+#from sensor import sensing
 
 slow = 50
 middle = 70
@@ -66,9 +67,24 @@ def timer():
     return redirect(url_for('index'))
 
 
+@app.route('/sensing', methods=["POST"])
+def sensing():
+    left, right = sensing()
+
+    fan = db.query.filter_by(id=1).one()
+
+    fan.left = left
+    fan.right = right
+
+    db.session.add(fan)
+    db.session.commit()
+
+    return render_template('fan/sensor.html')
+
+
 # 노말 모드 1
-@app.route('/normal', methods=["GET", "POST"])
-def normal():
+@app.route('/normal_mode', methods=["GET", "POST"])
+def normal_mode():
     choose_mode(1)
 
 
@@ -76,8 +92,8 @@ def normal():
 
 
 # 센서 인식모드 2
-@app.route('/sensor', methods=["GET", "POST"])
-def sensor():
+@app.route('/sensor_mode', methods=["GET", "POST"])
+def sensor_mode():
     choose_mode(2)
 
 
@@ -85,8 +101,8 @@ def sensor():
 
 
 # 얼굴인식 모드 3
-@app.route('/face', methods=["GET", "POST"])
-def face():
+@app.route('/face_mode', methods=["GET", "POST"])
+def face_mode():
     choose_mode(3)
 
 

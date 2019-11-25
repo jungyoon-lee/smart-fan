@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from config import CONNECT_STRING
@@ -27,6 +27,7 @@ def init_create_db():
         db.session.add(fan)
         db.session.commit()
 
+
 @app.route('/')
 def index():
     fan = Fan.query.filter_by(id=1).first()
@@ -36,8 +37,8 @@ def index():
         return render_template('index.html')
 
     if fan.mode is 1:
-        return redirect(url_for('normal'))
+        return redirect(url_for('normal_mode'))
     elif fan.mode is 2:
-        return redirect(url_for('sensor'))
+        return redirect(url_for('sensor_mode'))
     elif fan.mode is 3:
-        return redirect(url_for('face'))
+        return redirect(url_for('face_mode'))
