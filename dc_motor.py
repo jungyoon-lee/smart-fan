@@ -1,31 +1,26 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
 
-SW = 25
-AIN1 = 13
-PWMA = 19
-
-GPIO.setup(AIN1, GPIO.OUT, initial = GPIO.LOW)
-GPIO.setup(PWMA, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(SW,GPIO.IN)
-
-p=GPIO.PWM(PWMA,100)
-
-p.start(0)
-
-try:
+def dc_motor(speed): #0<speed<=100
     while 1:
-        key_in = GPIO.input(SW)
-        if key_in == 1:
-            while 1:
-                GPIO.output(AIN1, GPIO.HIGH)
-                p.ChangeDutyCycle(20)
-        else:
-            print("xzll")
-except KeyboardInterrupt:
-    pass
+        GPIO.setmode(GPIO.BCM)   
+        
+        AIN1 = 13
+        PWMA = 19
+        
+        GPIO.setup(AIN1, GPIO.OUT,initial=GPIO.LOW)
+        GPIO.setup(PWMA, GPIO.OUT,initial=GPIO.LOW)
+        
+        p_dc=GPIO.PWM(PWMA,100)
 
-p.stop()
-GPIO.cleanup()
+        p_dc.start(0)
+        
+        print(speed)
+        
+        
+        while 1:
+            GPIO.output(AIN1,GPIO.HIGH)
+            p_dc.ChangeDutyCycle(speed)
+            
+            
