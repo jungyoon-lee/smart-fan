@@ -15,7 +15,10 @@ strong = 100
 # head_spin(left, right, speed)
 def choose_mode(mode):
     fan = Fan.query.filter_by(id=1).one()
+
     fan.mode = mode
+    fan.state = 0
+    fan.spin_speed = 0
 
     db.session.add(fan)
     db.session.commit()
@@ -57,10 +60,8 @@ def timer():
 
     current_time = time.time()
 
-
     if current_time+1000:
         fan.speed = 0
-
 
     return redirect(url_for('index'))
 
@@ -78,7 +79,6 @@ def normal():
 @app.route('/sensor', methods=["GET", "POST"])
 def sensor():
     choose_mode(2)
-
 
 
     return render_template('fan/sensor.html')

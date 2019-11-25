@@ -8,38 +8,7 @@
 <div class="pusher">
   <h1>normal mode</h1>
 
-  <div class="ui vertical buttons" style="width: 332px;">
-    <form method="post" action="/wind/1">
-      <button class="massive ui yellow button" style="height: 95px;" name="1">
-        <i class="angle right icon"></i>
-        약풍
-      </button>
-    </form>
-    <form method="post" action="/wind/2">
-      <button class="massive ui olive button" style="height: 95px;" name="2">
-        <i class="angle double right icon"></i>
-        중풍
-      </button>
-    </form>
-    <form method="post" action="/wind/3">
-      <button class="massive ui green button" style="height: 95px;" name="3">
-        <i class="arrow circle right icon"></i>
-        강풍
-      </button>
-    </form>
-    <form method="post" action="/spin">
-      <button class="massive ui grey button" style="height: 95px;" name="4">
-        <i class="sync icon"></i>
-        회전
-      </button>
-    </form>
-    <form method="post" action="/wind/0">
-      <button class="massive ui red button" style="height: 95px;" name="0">
-        <i class="pause icon"></i>
-        정지
-      </button>
-    </form>
-  </div>
+  {% include 'fan/controller.html' %}
 
   <form class="ui action input" method="post" action="/timer">
     <input type="text" placeholder="초 단위" name="time">
