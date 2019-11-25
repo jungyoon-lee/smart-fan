@@ -8,7 +8,7 @@ https://docs.google.com/presentation/d/1HjljToAmHEqGHiP7KQ3gzLWKUbouB9nNMGS_PHmB
 ```buildoutcfg
 얼굴인식 : face_recognition 
 웹 서버  : flask
-
+motor    : RPi.GPIO
 ```
 ## 구축편
 
