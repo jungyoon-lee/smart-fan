@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="pusher">
+  <h1>camera mode</h1>
+
+  <img id="bg" style="width: 335px;" src="{{ url_for('video_feed') }}">
+
+</div>
+{% endblock %}
