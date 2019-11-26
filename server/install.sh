@@ -5,7 +5,7 @@ export LC_CTYPE="en_US.UTF-8"
 sudo apt install virtualenv
 virtualenv venv -p python3
 source ./venv/bin/activate
-pip install -r requirements.txt
+pip install -r require.txt
 
 sudo apt install libmysqlclient-dev build-essential libssl-dev libffi-dev
 sudo apt install mysql-server
