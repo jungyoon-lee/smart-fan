@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="pusher">
+  <h1>sensor mode</h1>
+
+  <form method="post" action="/sensor">
+      <button class="massive ui red button" style="height: 95px;" name="0">
+        센서 작동
+      </button>
+  </form>
+  {% include 'fan/controller.html' %}
+
+</div>
+{% endblock %}

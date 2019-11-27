@@ -1,0 +1,10 @@
+body {
+    background-color: #767676;
+}
+
+.ui.compact.segment {
+    margin-top: 200px;
+    text-align: center;
+    padding: 30px;
+    background-color:white;
+}

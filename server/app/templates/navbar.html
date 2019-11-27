@@ -1,0 +1,68 @@
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+{% endblock %}
+
+<div id="pc-menu">
+  <div class="ui secondary menu">
+    <a class="item" href="{{ url_for('index') }}">
+      Home
+    </a>
+    <div class="right menu">
+      <a class="item" href="">
+
+      </a>
+      <a class="item" href="">
+        <i class="cog icon"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="ui visible sidebar inverted vertical menu">
+    <a class="item header">
+        스마트팬
+    </a>
+    <a class="item menu" href="{{ url_for('normal_mode') }}">
+        기본 모드
+        <i class="angle left icon"></i>
+    </a>
+    <a class="item menu" href="{{ url_for('sensor_mode') }}">
+        센서 모드
+        <i class="angle left icon"></i>
+    </a>
+    <a class="item menu" href="{{ url_for('face_mode') }}">
+        얼굴인식 모드
+        <i class="angle left icon"></i>
+    </a>
+  </div>
+</div>
+
+<!-- ######################## -->
+
+<div id="m-menu" class="ui scale down sidebar vertical menu">
+  <div class="item">
+      <a class="item header">
+          스마트팬
+      </a>
+      <a class="item menu" href="{{ url_for('normal_mode') }}">
+          기본 모드
+          <i class="angle left icon"></i>
+      </a>
+      <a class="item menu" href="{{ url_for('normal_mode') }}">
+          기본 모드
+          <i class="angle left icon"></i>
+      </a>
+      <a class="item menu" href="{{ url_for('sensor_mode') }}">
+          센서 모드
+          <i class="angle left icon"></i>
+      </a>
+      <a class="item menu" href="{{ url_for('face_mode') }}">
+          얼굴인식 모드
+          <i class="angle left icon"></i>
+      </a>
+  </div>
+
+  <div class="item">
+
+  </div>
+
+</div>

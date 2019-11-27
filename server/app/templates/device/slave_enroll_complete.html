@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/device/master.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1 class="ui center aligned header">슬레이브 등록</h1>
+
+<div class="ui last container">
+  <div class="ui three steps">
+    <div class="disabled step">
+      <div class="content">
+        <div class="title">정보 입력</div>
+        <div class="description">슬레이브 정보 설정</div>
+      </div>
+    </div>
+    <div class="active step">
+      <div class="content">
+        <div class="title">완료</div>
+        <div class="description">슬레이브를 조종할 수 있게됩니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

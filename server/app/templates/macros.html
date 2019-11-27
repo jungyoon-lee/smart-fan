@@ -1,0 +1,51 @@
+{% macro render_register(field) %}
+    <div class="ui input big">
+        {{ field(**kwargs)|safe }}
+        {% if field.errors %}
+        <div class="ui hidden divider"></div>
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="ui hidden divider"></div>
+{% endmacro %}
+
+{% macro render_login(field) %}
+    <div class="ui left icon large input">
+        <i class="user icon"></i>
+        {{ field(**kwargs)|safe }}
+        {% if field.errors %}
+        <div class="ui hidden divider"></div>
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="ui hidden divider"></div>
+{% endmacro %}
+
+{% macro render_master_step() %}
+<div class="ui last container">
+  <div class="ui three steps">
+    <div class="disabled step">
+      <div class="content">
+        <div class="title">시리얼 번호 인증</div>
+        <div class="description">구라인지 진짠지 구별</div>
+      </div>
+    </div>
+    <div class="active step">
+      <div class="content">
+        <div class="title">정보 입력</div>
+        <div class="description">마스터 이름 설정</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="content">
+        <div class="title">완료</div>
+        <div class="description">마스터를 조종할 수 있게됩니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro %}

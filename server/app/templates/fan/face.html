@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="pusher">
+  <h1>camera mode</h1>
+  <a class="ui basic button" href="{{ url_for('face_select') }}">
+    <i class="icon user"></i>
+    얼굴 등록
+  </a>
+
+  {% include 'fan/controller.html' %}
+
+</div>
+{% endblock %}
