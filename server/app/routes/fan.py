@@ -4,7 +4,6 @@ import threading
 
 from app import app, db
 from app.models.fan import Fan
-import face_recog
 
 #from motor import fan_speed, head_spin
 #from sensor import sensing
@@ -81,21 +80,6 @@ def sensing():
     db.session.commit()
 
     return render_template('fan/sensor.html')
-
-
-def gen(file):
-    while True:
-        jpg_bytes = file.get_jpg_bytes()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + jpg_bytes + b'\r\n\r\n')
-
-
-@app.route('/video_feed')
-def video_feed():
-    return Response(
-        gen(face_recog.FaceRecog()),
-        mimetype='multipart/x-mixed-replace; boundary=frame'
-    )
 
 
 # 노말 모드 1

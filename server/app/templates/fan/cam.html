@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="pusher">
+  <h1>Select Face Photo</h1>
+  <form action="/face/" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit">
+  </form>
+
+  <form action="/face/save" method="POST">
+      <img id="bg" name="file" style="width: 335px;" src="{{ url_for('video_feed') }}">
+
+      <button class="massive ui button">
+        캡쳐
+      </button>
+  </form>
+
+</div>
+{% endblock %}
