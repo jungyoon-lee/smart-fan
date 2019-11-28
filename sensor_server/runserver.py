@@ -1,5 +1,20 @@
+from flask import Flask
+
 import RPi.GPIO as gpio
 import time
+
+app = Flask(__name__)
+
+gpio.setmode(gpio.BCM)
+gpio.setwarnings(False)
+
+trig = [5, 20, 23, 17, 26, 12, 4]
+echo = [6, 21, 24, 18, 27, 13, 22]
+
+for i in range(7):
+    gpio.setup(trig[i], gpio.OUT)
+    gpio.setup(echo[i], gpio.IN)
+
 
 def observation(trig,echo):
     gpio.output(trig,False)
@@ -7,14 +22,18 @@ def observation(trig,echo):
     gpio.output(trig,True)
     time.sleep(0.00001)
     gpio.output(trig,False)
+
+    pulse_start = 0
+    pluse_end = 0
     
     while gpio.input(echo) == 0:
-        pulse_start=time.time()
+        pulse_start = time.time()
         
     while gpio.input(echo) == 1:
-        pulse_end=time.time()
+        pulse_end = time.time()
         
     pulse_duration = pulse_end - pulse_start
+
     distance = pulse_duration*17000
     distance = round(distance,2)
     
@@ -43,24 +62,17 @@ def find_right(li):
     return 0
 
 
-def sensing():
-    gpio.setmode(gpio.BCM)
-    gpio.setwarnings(False)
-    
+@app.route('/sensing', methods=["GET", "POST"])
+def sensing():    
     left = 0
     right = 0
-    trig = [5, 20, 23, 17, 26, 12, 4]
-    echo = [6, 21, 24, 18, 27, 13, 22]
-    human_location=[0, 0, 0, 0, 0, 0, 0]
     sensors=[0, 0, 0, 0, 0, 0, 0]
-    
+    human_location=[0, 0, 0, 0, 0, 0, 0]
+   
     for i in range(7):
-        gpio.setup(trig[i], gpio.OUT)
-        gpio.setup(echo[i], gpio.IN)
+        sensors[i] = observation(trig[i], echo[i])
 
-        sensor[i] = observation(trig[i],echo[i])
-
-        if sensor[i]>70:
+        if sensor[i] > 70:
             sensor[i]=0
   
     print(fir)
@@ -79,6 +91,10 @@ def sensing():
     return left,right
 
 
-left, right = sensing()
-print(left)
-print(right)
+@app.route('/')
+def index():
+    return 'hello, sensor server!'
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8081)
