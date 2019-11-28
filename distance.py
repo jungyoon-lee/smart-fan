@@ -59,6 +59,9 @@ def sensing():
         gpio.setup(echo[i], gpio.IN)
 
         sensor[i] = observation(trig[i],echo[i])
+
+        if sensor[i]>70:
+            sensor[i]=0
   
     print(fir)
     print(sec)
