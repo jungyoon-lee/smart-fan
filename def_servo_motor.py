@@ -1,5 +1,14 @@
 import RPi.GPIO as GPIO
 import time
+from flask import Flask
+
+app = Flask(__name__)
+
+SRV = 17
+freq = 100.0
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SRV, GPIO.OUT)
+p = GPIO.PWM(SRV, freq)
 
 def convert_dc(deg):
     deg_min = 0.0
@@ -10,21 +19,18 @@ def convert_dc(deg):
     return ((deg - deg_min) * (dc_max - dc_min) / (deg_max - deg_min) + dc_min)
 
 
-def servo(l,r,speed): #basis speed = 1 and time.sleep = 0.02 speed should < r-l
+@app.route('/spin')
+def servo(l = 0, r = 180, speed = 1): #basis speed = 1 and time.sleep = 0.02 speed should < r-l
     if speed >= r-l:
         return 0
     
-    GPIO.setmode(GPIO.BCM)
+    r += 25  
 
-    SRV = 17
-    r+=25
-    
-    GPIO.setup(SRV,GPIO.OUT)
-
-    freq = 100.0
-    tm = speed*0.02
-    
-    p = GPIO.PWM(SRV, freq)
+    if(speed==1):
+        tm = speed*0.05
+    else:
+        tm = speed*0.02
+   
     p.start(0)
 
     try:
@@ -38,6 +44,10 @@ def servo(l,r,speed): #basis speed = 1 and time.sleep = 0.02 speed should < r-l
                 dc = convert_dc(float(deg))
                 p.ChangeDutyCycle(dc)
                 time.sleep(tm)                    
-                                    
-    except KeyboardInterrupt:
+    except:
         pass
+
+                                    
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
