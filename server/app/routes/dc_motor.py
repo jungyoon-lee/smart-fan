@@ -1,6 +1,6 @@
 from app import app
 import RPi.GPIO as GPIO
-from flask import request
+from flask import request, redirect, url_for
 import time
 
 # high = 0
@@ -8,8 +8,9 @@ import time
 # low  = 50
 # stop = 0
 
-GPIO.setmode(GPIO.BCM)
 
+#p_dc.ChangeDutyCycle(100)
+GPIO.setmode(GPIO.BCM)
 AIN1 = 13
 PWMA = 19
 
@@ -20,14 +21,19 @@ p_dc = GPIO.PWM(PWMA, 100)
 
 p_dc.start(0)
 
+
 @app.route('/wind/<int:speed>', methods=["GET", "POST"])
 def dc_motor(speed): #0 <= speed <= 100
-    if request.method == "POST":
+    if speed == 100:
+        GPIO.setmode(GPIO.BCM)
 
-        if speed == 100:
-            GPIO.output(AIN1, GPIO.LOW)
-        else:
-            GPIO.output(AIN1, GPIO.HIGH)
-            p_dc.ChangeDutyCycle(speed)
+        GPIO.setup(AIN1, GPIO.OUT, initial=GPIO.LOW)
+        GPIO.setup(PWMA, GPIO.OUT, initial=GPIO.LOW)
 
-    return (''), 204
+        p_dc.start(0)
+
+    else:
+        GPIO.output(AIN1, GPIO.HIGH)
+        p_dc.ChangeDutyCycle(speed)
+         
+    return redirect(url_for('index'))
