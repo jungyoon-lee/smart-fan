@@ -45,6 +45,16 @@ def range_check(sensors, human_location):
         if sensors[i] != 0:
             human_location[i] = 1
     
+    temp = []
+    num = 6
+
+    while True:
+        if num == -1:
+            break
+
+        temp.append(human_location[num])
+        num -= 1
+
     return human_location
         
     
@@ -72,7 +82,7 @@ def sensing():
     for i in range(7):
         sensors[i] = observation(trig[i], echo[i])
 
-        if sensors[i] > 70:
+        if sensors[i] > 60:
             sensors[i] = 0
         
         print(sensors[i])
