@@ -1,5 +1,5 @@
-from flask import Flask, redirect, url_for
-
+from flask import Flask, redirect, url_for, request, jsonify
+import requests
 import RPi.GPIO as gpio
 import time
 
@@ -44,7 +44,7 @@ def range_check(sensors, human_location):
     for i in range(7):
         if sensors[i] != 0:
             human_location[i] = 1
-    
+
     temp = []
     num = 6
 
@@ -54,8 +54,8 @@ def range_check(sensors, human_location):
 
         temp.append(human_location[num])
         num -= 1
-
-    return human_location
+    
+    return temp
         
     
 def find_left(li):
@@ -72,8 +72,10 @@ def find_right(li):
     return 0
 
 
-@app.route('/sensing', methods=["GET", "POST"])
+@app.route('/sensing')
 def sensing():   
+    ip_addr = 'http://' + request.remote_addr + ':8080/sensor/enroll'
+    
     left = 0
     right = 0
     sensors=[0, 0, 0, 0, 0, 0, 0]
@@ -91,10 +93,11 @@ def sensing():
     
     left = find_left(human_location)
     right = find_right(human_location)
+    data = {'left': left, 'right': right}
+
+    res = requests.post(ip_addr, data=data)
     
-    print(left)
-    print(right)
-    return left, right
+    return '이정윤 천재'
 
 
 @app.route('/')
