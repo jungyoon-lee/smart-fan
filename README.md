@@ -1,6 +1,6 @@
 # smart-fan
 
-[![시연 동영상](https://www.youtube.com/watch?v=UPeT55CLgkI.jpg)](https://www.youtube.com/watch?v=UPeT55CLgkI "시연 동영상")
+[![시연 동영상](https://img.youtube.com/vi/UPeT55CLgkI/0.jpg)](https://www.youtube.com/watch?v=UPeT55CLgkI "시연 동영상")
 
 
 #### PPT
